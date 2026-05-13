@@ -1,0 +1,10 @@
+asgiref==3.11.1
+Django==6.0.3
+django-taggit==6.1.0
+djhtml==3.0.10
+Faker==40.13.0
+mysqlclient==2.2.8
+python-dotenv==1.2.2
+sqlparse==0.5.5
+tzdata==2025.3
+whitenoise==6.12.0

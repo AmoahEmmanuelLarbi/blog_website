@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% block title %}Home{% endblock %}
+{% block content%}
+    {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+<!-- add change password button-->
+        <p>
+            <a href="{% url 'password_change' %}">Password Change</a>
+        </p>
+<!-- add logout button-->
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+        </form>
+        <a href="{% url 'posts' %}">View Blog</a>
+    {% else %}
+        <p>You are not logged in</p>
+        <p><a href="{%url 'password_reset' %}"> Password Reset</a></p>
+        <a href="{% url 'login' %}">Log In</a>
+
+    {% endif %}
+{% endblock %}

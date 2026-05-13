@@ -1,0 +1,71 @@
+TASK 1: Objective: Set up a new Django project specifically for a blog, which includes configuring the environment, establishing the initial models, and preparing the base templates. This foundational task ensures all participants start with a consistent and standardized setup.
+
+Task Description:
+Kick off the development of a comprehensive Django blog project. You’ll begin by setting up the Django environment, creating the primary Django application, and configuring the basic models necessary for a blogging platform.
+
+Step 1: Project Setup
+Install Django and Start the Project:
+Ensure Django is installed using pip install django.
+Create a new Django project named django_blog: bash django-admin startproject django_blog
+Navigate into your project directory and create a new Django app called blog: bash cd django_blog python manage.py startapp blog
+Register the new blog app by adding it to the INSTALLED_APPS list in django_blog/settings.py.
+Step 2: Configure the Database
+Database Configuration:
+By default, Django uses SQLite. If this is sufficient for your blog, no action is needed. However, for learning purposes, you can configure it to use PostgreSQL or another database by adjusting the DATABASES setting in settings.py.
+Step 3: Define Blog Models
+Model Specifications:
+Create a model Post in blog/models.py with the following fields:
+title: models.CharField(max_length=200)
+content: models.TextField()
+published_date: models.DateTimeField(auto_now_add=True)
+author: models.ForeignKey to Django’s User model, with a relation to handle multiple posts by a single author.
+Run the migrations to create the model in the database: bash python manage.py makemigrations blog python manage.py migrate
+Step 4: Set Up Static and Template Directories
+Static Files and Templates:
+Create directories for static files and templates within the blog app.
+Place the provided HTML, CSS, and JavaScript files into the appropriate directories. Ensure that Django is configured to find these files by setting STATIC_URL and TEMPLATES in settings.py.
+Step 5: Launch the Development Server
+Initial Testing:
+Start the Django development server to ensure everything is set up correctly: bash python manage.py runserver
+Open a browser and go to http://127.0.0.1:8000/ to see the initial setup.
+Deliverables:
+Project Structure: Submit the entire Django project setup, including settings and initial migrations.
+Code Files: Include your models.py with the Post model defined.
+Static and Template Files: Provide all HTML, CSS, and JavaScript files correctly placed in their respective directories.
+
+
+
+TASK 2: Objective: Develop a comprehensive user authentication system for your Django blog project. This system will enable user registration, login, logout, and profile management, crucial for a personalized user experience.
+
+Task Description:
+Build upon your initial setup by adding authentication functionalities to your django_blog project. This task involves setting up user registration, login, logout, and a simple profile management system.
+
+Step 1: Set Up User Authentication Views
+Authentication Views:
+Utilize Django’s built-in authentication views and forms to handle user login and logout. For registration and profile management, custom views will be created.
+Extend Django’s UserCreationForm for the registration form to include additional fields like email.
+Step 2: Create Templates for Authentication
+Templates for User Interactions:
+Develop HTML templates for login, registration, logout, and user profile pages. Ensure these templates are styled using the provided CSS.
+Templates should include forms for user input and should provide feedback for authentication errors or confirmations.
+Step 3: Configure URL Patterns
+Authentication URLs:
+Define URL patterns in blog/urls.py to handle paths for login (/login), logout (/logout), registration (/register), and profile management (/profile).
+Use Django’s path() function and the include() function to organize these URLs efficiently.
+Step 4: Implement Profile Management
+Profile Management Features:
+Develop a view that allows authenticated users to view and edit their profile details. This view should handle POST requests to update user information.
+Ensure the user can change their email and optionally extend the user model to include more fields like a profile picture or bio.
+Step 5: Test and Secure the Authentication System
+Testing and Security:
+Thoroughly test the registration, login, logout, and profile editing functionalities to ensure they work correctly and securely.
+Ensure that all forms are using CSRF tokens to protect against CSRF attacks.
+Passwords should be handled securely using Django’s built-in hashing algorithms.
+Step 6: Documentation
+Authentication Documentation:
+Provide detailed documentation on how the authentication system works, including descriptions of each part of the authentication process and how users interact with it.
+Include instructions on how to test each authentication feature.
+Deliverables:
+Code Files: Include all Python code for the authentication views, forms, and updated models if necessary.
+Template Files: Provide all HTML templates related to user authentication.
+Documentation: Detailed explanation of the authentication system, including setup instructions and user guides.

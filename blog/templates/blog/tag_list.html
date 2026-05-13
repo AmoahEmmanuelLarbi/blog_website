@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+{% include 'blog/_create_post.html' %}
+
+
+<div class="posts-list">
+    <h2>Explore posts about "{{tag.name|title}}"</h2>
+    {% for post in posts %}
+
+    <div class="post-item">
+        <h2>{{ post.title }}</h2>
+
+        <p>{{ post.content }}</p>
+    </div>
+
+    {% empty %}
+    <p>No post found.</p>
+
+    {% endfor %}
+
+</div>
+<br>
+<a href="{% url 'posts' %}" class="btn btn-ghost">← Back to Posts</a>
+
+
+<!-- add link to create new blog
+<a href="{% url 'post-create' %}">Create New Blog</a> -->
+
+{% endblock %}

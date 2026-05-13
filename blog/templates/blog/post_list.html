@@ -1,0 +1,104 @@
+{% extends "blog/base.html" %}
+{% block title %}Blog Posts{% endblock %}
+
+{% block content %}
+
+
+<!--include post button -->
+{% include 'blog/_create_post.html' %}
+
+<form method="GET" style="margin-bottom:1.5rem;">
+    <div class="search-bar">
+        <svg width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" name="query" placeholder="Search posts…" />
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+<div class="category-pills">
+    {% for rand_tag in random_tags %}
+
+    <span class="pill">
+        <a href="{% url 'tag_posts' rand_tag.slug %}">
+            {{ rand_tag.name|lower }}
+        </a>
+
+    </span>
+    </a>
+
+    {% endfor %}
+
+
+</div>
+
+{% if posts %}
+<div class="posts-list">
+
+    {% for post in posts %}
+    <div class="post-item">
+        <h2>{{ post.title }}</h2>
+
+        <div class="meta">
+            <span>by {{ post.author.username }}</span>
+            <span class="dot"></span>
+            <span>{{ post.created_at|date:"M d, Y" }}</span>
+        </div>
+
+        <p class="excerpt">
+            {{ post.content|truncatechars:200 }}
+        </p>
+
+        <!-- tags -->
+        <div class="tags">
+            {% for tag in post.tags.all %}
+            <a href="{% url 'tag_posts' tag.slug %}" class="tag-pill">
+                {{ tag.slug }}
+            </a>
+            {% endfor %}
+        </div>
+
+
+        <div class="post-actions">
+            <a href="{% url 'post-detail' post.pk %}" class="btn btn-primary">Read More →</a>
+
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<!-- Pagination -->
+<div class="pagination">
+    {% if posts.has_previous %}
+    <a href="?page=1">&laquo; First</a>
+    <a href="?page={{ posts.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current">
+        <!-- Page {{ posts.number }} of {{ posts.paginator.num_pages }} -->
+        Page {{ current_page_number }} of {{ total_pages }}
+    </span>
+
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">Next</a>
+    <a href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a>
+    {% endif %}
+</div>
+
+
+<!-- first to create a post -->
+{% else %}
+<div class="empty-state">
+    <p class="empty-icon">📭</p>
+    <p>No posts yet. Be the first to write one!</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'post-create' %}" class="btn btn-primary mt-2">Create Post</a>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

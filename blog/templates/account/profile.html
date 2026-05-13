@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Your Profile</h1>
+    <p>Manage your account details</p>
+</div>
+
+<div class="profile-card">
+    <div class="profile-banner">
+        <div class="profile-avatar-wrap">
+            <div class="profile-avatar">{{ user.username|first|upper }}</div>
+        </div>
+    </div>
+
+    <div class="profile-body">
+        <p class="profile-name">{{ user.username }}</p>
+        <p class="text-muted" style="font-size:0.85rem;color:var(--text-muted);">Member</p>
+
+        <div class="profile-fields">
+            <div class="profile-field">
+                <span class="field-label">Username</span>
+                <span class="field-value">{{ user.username }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="field-label">Email</span>
+                <span class="field-value">{{ user.email }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="field-label">Member since</span>
+                <span class="field-value">{{ user.date_joined|date:"M d, Y · g:i a" }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-footer">
+        <a href="{% url 'profile-edit' %}" class="btn btn-primary">✏️ Edit Profile</a>
+        <a href="{% url 'password_change' %}" class="btn btn-ghost">Change your password</a>
+    </div>
+</div>
+
+{% endblock %}

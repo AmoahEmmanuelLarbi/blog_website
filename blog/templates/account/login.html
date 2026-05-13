@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+  <div class="auth-card stripe-top">
+    <div class="auth-header">
+      <p class="auth-logo">✦ Django Blog</p>
+      <h1>Welcome back</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <div class="auth-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-control" type="text" name="username" id="username" placeholder="Enter username"
+                 autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" type="password" name="password" id="password" placeholder="Enter password"
+                 autocomplete="current-password" />
+        </div>
+        {% if form.errors %}
+          <div class="alert alert-error">Invalid username or password.</div>
+        {% endif %}
+
+        <div class="forgot_pass">
+          <a href="{% url 'password_reset' %}">Forgot your password ?</a>
+        </div>
+        <button class="btn btn-primary btn-full" type="submit">Sign In</button>
+      </form>
+    </div>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="{% url 'register' %}">Create one →</a>
+    </div>
+  </div>
+
+{% endblock %}

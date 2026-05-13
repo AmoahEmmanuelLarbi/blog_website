@@ -1,0 +1,55 @@
+{%load static%}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Django Blog{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <nav>
+    <a href="{% url 'posts' %}" class="nav-brand">Django Blog</a>
+    <ul class="nav-links">
+      <li><a href="{% url 'posts' %}">Home</a></li>
+      <!-- <li><a href="{% url 'posts' %}">Blog Posts</a></li> -->
+
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'profile' %}">Profile</a></li>
+      <li>
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn-logout">Logout</button>
+        </form>
+      </li>
+      {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+
+
+    </ul>
+  </nav>
+
+
+  <main>
+
+    {% block content %}
+    <!-- Page-specific content goes here -->
+    {% endblock %}
+  </main>
+
+
+
+  <footer>
+    <p>&copy; 2026 Django Blog — Built with ♥</p>
+  </footer>
+
+  <!-- <script src="{% static 'js/scripts.js' %}"></script> -->
+</body>
+
+</html>

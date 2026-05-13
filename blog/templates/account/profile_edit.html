@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% block title %} Edit User Profile {% endblock %}
+
+{% block content %}
+
+    <div class="form-card">
+        <h2 class="form-title">Edit your profile.</h2>
+        <br>
+    <!-- <div class="auth-body"> -->
+        <form method="post" class="form">
+            {% csrf_token %}
+            <div class="form-group">
+            <!-- {{ form.as_p }} -->
+                {{form.username}}
+
+            </div>
+
+            <button class="btn btn-primary" type="submit">Edit</button>
+        </form>
+    <!-- </div> -->
+
+    </div>
+
+
+
+{% endblock %}
