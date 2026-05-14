@@ -33,6 +33,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
+if not DEBUG:
+    print(DEBUG)
+    raise ValueError("Debug error")
+
 ALLOWED_HOSTS = ["devsurfer.pythonanywhere.com", "localhost", "127.0.0.1"]
 # ["localhost", "127.0.0.1"]
 
