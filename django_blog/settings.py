@@ -14,11 +14,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# load .env configuration
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -29,7 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["devsurfer.pythonanywhere.com", "localhost", "127.0.0.1"]
 # ["localhost", "127.0.0.1"]
 
 
@@ -47,7 +50,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     # third party apps
     "taggit",
-    "faker",
+    # "faker",
 ]
 
 MIDDLEWARE = [
@@ -82,14 +85,14 @@ WSGI_APPLICATION = "django_blog.wsgi.application"
 
 # secure application
 # configure https support
-SECURE_SSL_REDIRECT = False
+# SECURE_SSL_REDIRECT = False
 # SECURE_HSTS_SECONDS = 259200
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD = True
 
 # secure cookies
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
 
 # new (configure secure settings)
 # SECURE_BROWSER_XSS_FILTER = True
@@ -104,14 +107,22 @@ CSRF_COOKIE_SECURE = False
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# mysql config
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "HOST": os.getenv("DB_HOST"),
+#         "PORT": os.getenv("DB_PORT"),
+#     }
+# }
 
 
 # Password validation
